@@ -1,0 +1,24 @@
+.skill-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .skill-item {
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .skill-item:hover {
+    transform: scale(1.1);
+  }
+  

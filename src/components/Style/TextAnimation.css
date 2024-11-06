@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+:root {
+    --game-font: "Press Start 2P", cursive;
+    --sassy: #bf4080;
+    --coral: #fe5f55;
+    --royal: #6f2ed8;
+    --tiffany: #00b4d8;
+    --peach: #e6f14a;
+    --off-white: #fffff7;
+    --colors: var(--sassy), var(--coral), var(--royal), var(--tiffany), var(--peach);
+
+    background: black;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    gap: 0.5rem;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    text-align: center;
+}
+
+.neon-text {
+    position: relative;
+    font-family: var(--game-font);
+    font-size: 4.2rem;
+    width: 100%;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px var(--sassy);
+    color: var(--off-white);
+    z-index: 10;
+}
+
+.neon-text::before {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-family: inherit;
+    font-size: 4.2rem;
+    color: var(--sassy);
+    width: 100%;
+    height: 100%;
+    animation: animateTextColor 3s infinite linear;
+    z-index: -1;
+}
+
+.rotating-text {
+    position: relative;
+    -webkit-text-stroke: 1px var(--sassy);
+}
+
+.rotating-text::before {
+    animation: rotatingWord 2.8s linear infinite;
+}
+
+.rotating-text::after {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 8px;
+    animation: animateTextColor 3s infinite linear, rotatingWord 5s linear infinite;
+    z-index: -1;
+}
+
+@keyframes animateTextColor {
+    0% {
+        color: var(--tiffany);
+    }
+
+    20% {
+        color: var(--sassy);
+    }
+
+    50% {
+        color: var(--coral);
+    }
+
+    60% {
+        color: var(--royal);
+    }
+
+    80% {
+        color: var(--peach);
+    }
+
+    100% {
+        color: var(--tiffany);
+    }
+}
+
+@keyframes rotatingWord {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    20% {
+        transform: translate(5px, 0px);
+    }
+
+    40% {
+        transform: translate(5px, 5px);
+    }
+
+    60% {
+        transform: translate(0px, 5px);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
