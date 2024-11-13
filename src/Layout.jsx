@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import CustomCursor from "./components/Style/CustomCursor";
+
 
 function Layout() {
   return (
@@ -10,6 +12,7 @@ function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <CustomCursor/>
     </>
   );
 }

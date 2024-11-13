@@ -19,7 +19,7 @@ const CustomCursor = () => {
 
     // Animate cursor size on hover over specified elements
     const handleMouseEnter = () => {
-      gsap.to(cursor, { scale: 6, duration: 0.2 });
+      gsap.to(cursor, { scale: 10, duration: 0.2 });
     };
     const handleMouseLeave = () => {
       gsap.to(cursor, { scale: 1, duration: 0.2 });

@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import Card from '../Card/Card';
-import CustomCursor from '../Style/CustomCursor';
 
 const AboutPage = () => {
   const aboutRef = useRef(null);
@@ -58,7 +57,6 @@ const AboutPage = () => {
           </p>
         </div>
       </div>
-    <CustomCursor/>
 
       {/* Footer */}
       <div className="mt-12 text-center text-gray-500">

@@ -13,7 +13,7 @@ function Home() {
   return (
     <div
       id="main-container"
-      className="min-h-screen  bg-gray-900 flex items-center justify-center sm:px-6 lg:px-8 transition-all duration-300 text-gray-900 "
+      className="min-h-screen bg-gray-900 flex items-center justify-center sm:px-6 lg:px-8 transition-all duration-300 text-gray-900  "
     >
       {" "}
       <div className="mx-auto flex rounded-3xl flex-col justify-center items-center transition-all duration-300">
