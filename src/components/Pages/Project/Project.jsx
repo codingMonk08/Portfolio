@@ -6,6 +6,7 @@ import BlogApp from '../../../assets/BlogApp.jpeg';
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CustomCursor from "../../Style/CustomCursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,6 +121,7 @@ const Project = () => {
           ))}
         </div>
       </section>
+      <CustomCursor />
     </div>
   );
 };
