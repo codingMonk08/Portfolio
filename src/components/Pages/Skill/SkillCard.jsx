@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 const SkillCard = ({ skill }) => {
@@ -15,7 +15,7 @@ const SkillCard = ({ skill }) => {
   return (
     <div
       ref={cardRef}
-      className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 m-4 text-center transform hover:scale-105 transition-transform duration-300"
+      className=" max-w-xs w-full  bg-white rounded-lg shadow-lg p-6 m-4 text-center transform hover:scale-105 transition-transform duration-300"
     >
       <div className="text-3xl mb-4">
         {skill.icon ? skill.icon : <span className="text-gray-500">🌐</span>}

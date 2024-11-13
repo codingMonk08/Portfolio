@@ -1,47 +1,16 @@
 import { FaGithub } from "react-icons/fa";
 import { RiArrowRightUpFill } from "react-icons/ri";
-import EdTech from '../../assets/EdTech.png';
-import JWTAuth from '../../assets/JWTAuth.png';
-import BlogApp from '../../assets/BlogApp.jpeg';
-import { useState, useEffect, useRef } from "react";
-import WaterfallLoader from "../../Loader/WaterfallLoader";
+import EdTech from '../../../assets/EdTech.png';
+import JWTAuth from '../../../assets/JWTAuth.png';
+import BlogApp from '../../../assets/BlogApp.jpeg';
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Project = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const projectRefs = useRef([]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (projectRefs.current.length > 0) {
-      projectRefs.current.forEach((project, index) => {
-        gsap.from(project, {
-          opacity: 0,
-          y: 50,
-          duration: 0.3,
-          scrollTrigger: {
-            trigger: project,
-            start: "top 80%",
-            end: "top 20%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-    }
-  }, [isLoading]);
-
-  if (isLoading) {
-    return <WaterfallLoader />;
-  }
 
   const projects = [
     {
@@ -57,7 +26,7 @@ const Project = () => {
       title: "Authentication Web",
       description: "A secure authentication and authorization system using JWT and bcrypt. User passwords are hashed with bcrypt for protection, while JWT enables safe and stateless session management.",
       imageUrl: JWTAuth,
-      githubLink: "https://github.com/example/project2",
+      githubLink: "https://github.com/codingMonk08/JWT_Auth",
       demoLink: "https://example.com/project2-demo",
     },
     {
@@ -70,17 +39,45 @@ const Project = () => {
     },
   ];
 
+  useEffect(() => {
+    // ScrollTrigger animation for the project cards
+    gsap.utils.toArray(".project-card").forEach((card) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+
+    // Hover animation for project cards
+    gsap.utils.toArray(".project-card").forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, { scale: 1.05, duration: 0.3 });
+      });
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, { scale: 1, duration: 0.3 });
+      });
+    });
+  }, []);
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
+    <div className="bg-gray-900 mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
       <section className="min-h-screen">
-        <h2 className="text-4xl text-center text-indigo-500 mb-8 font-extrabold leading-none tracking-tight lg:text-5xl py-4">
+        <h2 className="text-4xl text-center text-white mb-8 font-extrabold leading-none tracking-tight lg:text-5xl py-4">
           My Work
         </h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className="shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
+              className="project-card shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
               ref={(el) => (projectRefs.current[index] = el)}
             >
               <div className="relative">
@@ -91,7 +88,7 @@ const Project = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-75"></div>
               </div>
-              <div className="p-6 bg-indigo-500 flex flex-col justify-between text-white">
+              <div className="p-6 bg-gray-800 flex flex-col justify-between text-white">
                 <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
                 <p className="text-base mb-4 line-clamp-3">{project.description}</p>
                 <div className="flex space-x-4">
@@ -100,7 +97,7 @@ const Project = () => {
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white text-indigo-500 font-bold py-2 px-4 rounded inline-flex items-center transition-colors duration-300 hover:bg-indigo-500 hover:text-white"
+                      className="bg-white text-black font-bold py-2 px-4 rounded inline-flex items-center transition-colors duration-300"
                     >
                       Github
                       <FaGithub className="ml-2" />
@@ -111,7 +108,7 @@ const Project = () => {
                       href={project.demoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white text-indigo-500 font-bold py-2 px-4 rounded inline-flex items-center transition-colors duration-300 hover:bg-indigo-500 hover:text-white"
+                      className="bg-white text-black font-bold py-2 px-4 rounded inline-flex items-center transition-colors duration-300"
                     >
                       Live
                       <RiArrowRightUpFill className="ml-2" />

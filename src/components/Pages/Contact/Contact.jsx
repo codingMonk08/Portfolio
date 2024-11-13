@@ -2,7 +2,6 @@ import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import emailjs from '@emailjs/browser';
 
-// Load environment variables
 const SERVICE_ID = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID;
 
@@ -22,7 +21,6 @@ function ContactUs() {
     e.preventDefault();
     setLoading(true);
 
-    // Simple client-side validation
     if (!formData.name || !formData.email || !formData.message) {
       toast.error('Please fill in all fields');
       setLoading(false);
@@ -32,7 +30,6 @@ function ContactUs() {
     try {
       localStorage.setItem('formData', JSON.stringify(formData));
 
-      // Send email using EmailJS
       const response = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
@@ -59,62 +56,64 @@ function ContactUs() {
   };
 
   return (
-    <div className="max-w-4xl  mt-10 rounded-2xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="contact-us text-indigo-500 bg-indigo-500 mt-2 rounded-lg shadow-md p-4">
-        <h2 className="text-xl text-center font-semibold mb-2">Contact Us</h2>
-        <p className="mx-auto text-center">Have a question or want to work together?</p>
-        <form onSubmit={handleSubmit} className="mt-4">
-          <div className="mb-4">
-            <label htmlFor="name" className="block font-semibold mb-1">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your Name"
-              autoComplete="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block font-semibold mb-1">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="example@gmail.com"
-              autoComplete="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="message" className="block font-semibold mb-1">Message:</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="4"
-              placeholder="Write your message!"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none"
-              required
-            ></textarea>
-          </div>
+    <div className="mx-auto mt-10 bg-gradient-to-r from-slate-300 via-slate-600 to-slate-900  max-w-sm px-6 py-8  rounded-2xl shadow-xl">
+      <div className="text-center text-slate-50 mb-6">
+        <h2 className="text-3xl mb-2">Contact Us</h2>
+        <p className="text-lg">Have a question or want to work together?</p>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="mb-5">
+          <label htmlFor="name" className="block mb-2 text-sm font-medium text-white">Your Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Your Full Name"
+            autoComplete="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+        </div>
+        <div className="mb-5">
+          <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Your Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="name@email.com"
+            autoComplete="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+        </div>
+        <div className="mb-5">
+          <label htmlFor="message" className="block mb-2 text-sm font-medium text-white">Your Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Write your message here..."
+            value={formData.message}
+            onChange={handleChange}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+          />
+        </div>
+        <div>
           <button
             type="submit"
             disabled={loading}
-            className={`text-white shadow-xl hover:text-white hover:bg-indigo-600 rounded-full font-semibold px-4 py-2 transition duration-300 ease-in-out ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`text-black bg-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            {loading ? 'Sending...' : 'Send Message'}
+            {loading ? 'Sending...' : 'Submit'}
           </button>
-        </form>
-        <Toaster />
-      </div>
+        </div>
+      </form>
+      <Toaster />
     </div>
   );
 }

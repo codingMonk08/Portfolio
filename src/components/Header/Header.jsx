@@ -1,122 +1,148 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import { FaBars } from "react-icons/fa";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { IoHomeOutline, IoPersonOutline, IoFolderOutline, IoMailOutline } from "react-icons/io5";
+import ContactUs from "../Pages/Contact/Contact";
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+// Navbar Container
+const NavbarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  z-index: 1000;
+`;
+
+// Carousel Wrapper with gradient background
+const Carousel = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  background: linear-gradient(to right, #cbd5e1, #475569, #0f172a);
+  color: white;
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+`;
+
+// Icon Container (using motion here with transient prop $isActive)
+const IconContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  color: ${({ $isActive }) => ($isActive ? "#FFF" : "#FFF")};
+  font-size: ${({ $isActive }) => ($isActive ? "1rem" : "1rem")};
+  transition: color 0.3s, font-size 0.3s;
+  &:hover {
+    color: #FFF;
+  }
+`;
+
+// Label styling
+const Label = styled.span`
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+  color: ${({ $isActive }) => ($isActive ? "#cbd5e1" : "#FFF")};
+`;
+
+// Modal Container styling for the Contact form modal
+const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: ${({ isVisible }) => (isVisible ? "flex" : "none")};
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+`;
+
+// Close Button styling
+const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  &:hover {
+    color: #ff6b6b;
+  }
+`;
+
+const Header = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Define nav items
   const navItems = [
     { name: "Home", slug: "/" },
-    { name: "My Work", slug: "/project" },
-    { name: "Blog", slug: "/Blog" },
-    { name: "Contact", slug: "/Contact" },
+    { name: "About", slug: "/about" },
+    { name: "Projects", slug: "/project" },
+    { name: "Contact", slug: "/contact" },
   ];
+
+  const handleIconClick = (slug) => {
+    if (slug === "/contact") {
+      setIsModalOpen(true);
+    } else {
+      navigate(slug);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
-      <header className="sticky top-0 bg-white shadow-lg text-indigo-500 z-50 w-full">
-        <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-8">
-          {/* Logo */}
-          <Link to="/" className="text-2xl font-bold tracking-wide">
-            <div className="flex items-center justify-center w-12 h-12 bg-indigo-500 text-white font-semibold rounded-full hover:scale-105 transform transition-transform duration-300">
-              SD
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex space-x-8 items-center">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => navigate(item.slug)}
-                className={`text-lg font-medium transition duration-300 px-4 py-2 rounded-lg ${
-                  location.pathname === item.slug
-                    ? "bg-white text-indigo-500 shadow-md"
-                    : "text-indigo-500 hover:bg-indigo-100"
-                }`}
+      <NavbarContainer>
+        <Carousel>
+          {navItems.map((item, index) => {
+            const isActive = window.location.pathname === item.slug;
+            return (
+              <IconContainer
+                key={index}
+                $isActive={isActive}
+                onClick={() => handleIconClick(item.slug)}
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                whileTap={{ scale: 0.9 }}
               >
-                {item.name}
-              </button>
-            ))}
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="px-4 py-2 border-2 border-indigo-500 font-medium rounded-lg transition duration-300 text-indigo-500 hover:bg-indigo-100"
-            >
-              Resume Download
-            </button>
-          </div>
+                <motion.div>
+                  {index === 0 ? (
+                    <IoHomeOutline />
+                  ) : index === 1 ? (
+                    <IoPersonOutline />
+                  ) : index === 2 ? (
+                    <IoFolderOutline />
+                  ) : (
+                    <IoMailOutline />
+                  )}
+                </motion.div>
+                <Label $isActive={isActive}>{item.name}</Label>
+              </IconContainer>
+            );
+          })}
+        </Carousel>
+      </NavbarContainer>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-indigo-500 focus:outline-none"
-          >
-            {isMenuOpen ? <AiOutlineClose size={28} /> : <FaBars size={28} />}
-          </button>
-
-          {/* Mobile Navigation Links */}
-          {isMenuOpen && (
-            <div className="lg:hidden fixed inset-0 bg-white flex flex-col items-center space-y-6 pt-20 z-40 text-indigo-500">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    navigate(item.slug);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`text-xl font-medium transition duration-300 px-4 py-2 rounded-lg ${
-                    location.pathname === item.slug
-                      ? "bg-white text-indigo-500 shadow-md"
-                      : "hover:bg-indigo-100"
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ))}
-              <button
-                onClick={() => {
-                  setIsModalOpen(true);
-                  setIsMenuOpen(false);
-                }}
-                className="px-6 py-3 border-2 border-indigo-500 font-medium rounded-lg text-indigo-500 transition duration-300 hover:bg-indigo-100"
-              >
-                Resume Download
-              </button>
-            </div>
-          )}
-        </nav>
-      </header>
-
-      {/* Resume Download Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
-          <div className="bg-white text-indigo-500 p-8 rounded-lg shadow-lg max-w-md text-center relative">
-            {/* Close Icon */}
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-indigo-500 hover:text-gray-500"
-            >
-              <AiOutlineClose size={24} />
-            </button>
-            <h2 className="text-2xl font-semibold mb-4">Request My Resume</h2>
-            <p className="mb-6">
-              I'm excited to share my experience and skills with you! To get a copy of my resume, please reach out via the contact form.
-            </p>
-            <Link
-              to="/Contact"
-              onClick={() => setIsModalOpen(false)}
-              className="px-6 py-3 font-medium text-indigo-500 bg-white border-2 border-indigo-500 rounded-lg shadow-lg hover:bg-indigo-100 transition-all duration-300"
-            >
-              Go to Contact Form
-            </Link>
-          </div>
+      {/* Contact Form Modal */}
+      <ModalContainer isVisible={isModalOpen} onClick={closeModal}>
+        <div onClick={(e) => e.stopPropagation()} className="relative">
+          <ContactUs />
+          {/* Close Button */}
+          <CloseButton onClick={closeModal} className="mt-8">×</CloseButton>
         </div>
-      )}
+      </ModalContainer>
     </>
   );
-}
+};
+
+export default Header;
