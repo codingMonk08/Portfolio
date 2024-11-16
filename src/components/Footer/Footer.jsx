@@ -1,9 +1,8 @@
-import React from 'react';
 import { FaGithubSquare, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-4 lg:py-8 px-6 lg:px-8 transition-all duration-300">
+    <footer className="bg-gray-900 pb-20 text-white py-4 lg:py-8 px-6 lg:px-8 transition-all duration-300">
       <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-8">
         
         {/* Text Section */}
