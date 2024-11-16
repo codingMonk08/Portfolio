@@ -74,8 +74,8 @@ const CardButton = styled(motion.button)`
   cursor: pointer;
   transition: all 0.3s ease;
   &:hover {
-    background: #cbd5e1;
-    color: #0f172a;
+    background: #fff;
+    color: #000;
   }
 `;
 

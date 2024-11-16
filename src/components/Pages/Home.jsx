@@ -4,7 +4,7 @@ import SkillSection from "./Skill/skill";
 import Card from "../Card/Card";
 import { Typewriter } from "react-simple-typewriter";
 import { BsBoxArrowInUpRight } from "react-icons/bs"; // Icon for CTA button
-import "../Style/font.css";
+
 import { motion } from "framer-motion";
 
 function Home() {
