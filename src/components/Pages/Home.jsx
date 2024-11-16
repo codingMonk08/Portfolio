@@ -86,6 +86,7 @@ function Home() {
               whileHover={{ x: 5, rotate: 45 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
+              
               <BsBoxArrowInUpRight size={20} />
             </motion.div>
           </NavLink>
