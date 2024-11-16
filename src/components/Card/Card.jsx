@@ -79,7 +79,6 @@ const CardButton = styled(motion.button)`
   }
 `;
 
-// Main Card Component
 const Card = () => {
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: true });
