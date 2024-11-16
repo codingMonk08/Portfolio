@@ -51,7 +51,7 @@ function Home() {
         {/* Text Content */}
         <div
           to="/about"
-          className="text-center px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32  text-gray-900 dark:bg-gray-800 dark:text-gray-200 rounded-xl py-4 sm:py-6 md:py-8 lg:py-10 drop-shadow-lg text-primary border-2 border-slate-950 -mt-8 max-w-4xl mx-auto transition-all duration-300"
+          className="text-center px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32  text-gray-900 dark:bg-gray-800 dark:text-gray-200 rounded-xl py-4 sm:py-6 md:py-8 lg:py-10 drop-shadow-lg text-primary border-2 border-slate-50 -mt-8 max-w-4xl mx-auto transition-all duration-300"
         >
           <div className="p-6 bg-gray-900 ">
             <h2 className="text-2xl font-semibold text-teal-400"> Expertise</h2>
