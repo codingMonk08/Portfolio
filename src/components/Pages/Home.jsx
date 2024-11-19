@@ -4,7 +4,7 @@ import SkillSection from "./Skill/skill";
 import Card from "../Card/Card";
 import { Typewriter } from "react-simple-typewriter";
 import { BsBoxArrowInUpRight } from "react-icons/bs"; // Icon for CTA button
-
+import { MdCloudDownload } from "react-icons/md"; // New download icon
 import { motion } from "framer-motion";
 
 function Home() {
@@ -13,13 +13,24 @@ function Home() {
   return (
     <div
       id="main-container"
-      className="min-h-screen bg-gray-900 flex items-center justify-center sm:px-6 lg:px-8 transition-all duration-300 text-gray-900  "
+      className="min-h-screen bg-gray-900 flex items-center justify-center sm:px-6 lg:px-8 transition-all duration-300 text-gray-900 relative"
     >
-      {" "}
       <div className="mx-auto flex rounded-3xl flex-col justify-center items-center transition-all duration-300">
+        {/* Resume Download Button at Top-Right */}
+        <div className="absolute top-4 right-4">
+          <a
+            href="/path/to/your/resume.pdf" // Replace with the actual path to your resume
+            download
+            className="inline-flex items-center hover:bg-teal-500 text-white font-semibold py-2 px-4 rounded-lg shadow-sm shadow-white transition-transform "
+          >
+            Resume <MdCloudDownload className="ml-2" size={20} /> {/* New Download Icon */}
+
+          </a>
+        </div>
+
         {/* Introduction Section */}
         <div className="text-center p-20 mt-10 rounded-md">
-          <h1 className="text-teal-500 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight transition-transform transform-gpu duration-300 hover:scale-105 mb-4">
+          <h1 className="text-teal-400 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight transition-transform transform-gpu duration-300 hover:scale-105 mb-4">
             <h1> 👋 Hello, I&apos;m Shantanu Deshpande!</h1>{" "}
             <Typewriter
               words={["JavaScript Developer.", "Salesforce Enthusiast."]}
@@ -51,12 +62,12 @@ function Home() {
         {/* Text Content */}
         <div
           to="/about"
-          className="text-center px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32  text-gray-900 dark:bg-gray-800 dark:text-gray-200 rounded-xl py-4 sm:py-6 md:py-8 lg:py-10 drop-shadow-lg text-primary border-2 border-slate-50 -mt-8 max-w-4xl mx-auto transition-all duration-300"
+          className="text-center px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 text-gray-900 dark:bg-gray-800 dark:text-gray-200 rounded-xl py-4 sm:py-6 md:py-8 lg:py-10 drop-shadow-lg text-primary border-2 border-slate-50 -mt-8 max-w-4xl mx-auto transition-all duration-300"
         >
-          <div className="p-6 bg-gray-900 ">
-            <h2 className="text-2xl font-semibold text-teal-400"> Expertise</h2>
+          <div className="p-6 bg-gray-900">
+            <h2 className="text-2xl font-semibold text-teal-400">Expertise</h2>
             <p
-              className="text-gray-300 mt-2 "
+              className="text-gray-300 mt-2"
               style={{ fontFamily: "gothambo" }}
             >
               I&apos;m JavaScript Salesforce Developer with over 2 years of
@@ -78,7 +89,7 @@ function Home() {
         <div className="flex justify-center mt-6">
           <NavLink
             to="/project"
-            className="inline-flex  items-center bg-gradient-to-r from-slate-300 via-slate-600 to-slate-900 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-transform  hover:scale-105 "
+            className="inline-flex items-center bg-gradient-to-r from-slate-300 via-slate-600 to-slate-900 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-transform hover:scale-105"
           >
             See My Work
             <motion.div
@@ -86,7 +97,6 @@ function Home() {
               whileHover={{ x: 5, rotate: 45 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              
               <BsBoxArrowInUpRight size={20} />
             </motion.div>
           </NavLink>
