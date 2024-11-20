@@ -20,13 +20,16 @@ const NavbarContainer = styled.div`
 const Carousel = styled.div`
   display: flex;
   gap: 1.5rem;
-  background: linear-gradient(to right, #cbd5e1, #475569, #0f172a);
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
   color: white;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for definition */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Softer shadow */
 `;
+
 
 // Icon Container (using motion here with transient prop $isActive)
 const IconContainer = styled(motion.div)`
@@ -34,7 +37,7 @@ const IconContainer = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  color: ${({ $isActive }) => ($isActive ? "#FFF" : "#FFF")};
+  color: ${({ $isActive }) => ($isActive ? "#1ec8c8" : "#FFF")};
   font-size: ${({ $isActive }) => ($isActive ? "1rem" : "1rem")};
   transition: color 0.3s, font-size 0.3s;
   &:hover {
@@ -46,7 +49,7 @@ const IconContainer = styled(motion.div)`
 const Label = styled.span`
   font-size: 0.9rem;
   margin-top: 0.2rem;
-  color: ${({ $isActive }) => ($isActive ? "#cbd5e1" : "#FFF")};
+  color: ${({ $isActive }) => ($isActive ? "#1ec8c8" : "#FFF")};
 `;
 
 // Modal Container styling for the Contact form modal
