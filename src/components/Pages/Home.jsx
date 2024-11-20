@@ -21,7 +21,7 @@ function Home() {
           <a
             href="/path/to/your/resume.pdf" // Replace with the actual path to your resume
             download
-            className="inline-flex items-center hover:text-teal-500 hover:bg-white text-white font-semibold py-2 px-4 rounded-lg shadow-sm shadow-white transition-transform "
+            className="inline-flex items-center hover:text-teal-500  text-white font-semibold py-2 px-4 transition-transform "
           >
             Resume <MdCloudDownload className="ml-2" size={20} /> {/* New Download Icon */}
 
