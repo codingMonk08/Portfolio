@@ -19,7 +19,7 @@ function Home() {
         {/* Resume Download Button at Top-Right */}
         <div className="absolute top-4 right-4">
           <a
-            href="/path/to/your/resume.pdf" // Replace with the actual path to your resume
+            href="https://drive.google.com/file/d/1WQEo_jjMK5hsERVRBvbnF-cOR_o_OLsD/view?usp=sharing" // Replace with the actual path to your resume
             download
             className="inline-flex items-center hover:text-teal-500  text-white font-semibold py-2 px-4 transition-transform "
           >
